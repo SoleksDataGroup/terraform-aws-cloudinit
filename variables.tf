@@ -14,7 +14,7 @@ variable "base64_encode" {
   default = true
 }
 
-variable "cloudint_userdata" {
+variable "cloudinit_userdata" {
   description = "Cloudinit userdata"
   type = object({
     groups = optional(list(string))
