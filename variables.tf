@@ -3,7 +3,7 @@
 //
 
 variable "groups" {
-  descirption = "List of the groups to be created by the module"
+  description = "List of the groups to be created by the module"
   type = list(string)
   default = []
 }
