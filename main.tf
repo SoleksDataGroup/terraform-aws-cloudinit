@@ -8,6 +8,6 @@ data "cloudinit_config" "cloudinit_userdata" {
 
   part {
     content_type = "text/cloud-config"
-    content = templatefile("templates/cloudinit.yaml.tftpl", { cloudinit_userdata = var.cloudinit_userdata})
+    content = templatefile("./templates/cloudinit.yaml.tftpl", { cloudinit_userdata = var.cloudinit_userdata})
   }
 }
