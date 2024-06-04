@@ -1,3 +1,7 @@
+// Module: terraform-aws-cloudinit
+// Descriprion: module output block
+//
+
 output "userdata" {
-  value = templatefile("templates/cloudinit.yaml.tftpl", { cloudinit_userdata = var.cloudinit_userdata})
+  value = "${data.cloudinit_config.cloudinit_userdata.rendered}"
 }
