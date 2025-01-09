@@ -25,6 +25,13 @@ variable "cloudinit_userdata" {
       sudo = optional(string)
       ssh-authorized-keys = optional(string)
     })))
+    write_files = optional(list(object({
+      path = string
+      content = optional(string)
+      encoding = optional(string)
+      permissions = optional(string)
+      owner = optional(string)
+    })))
   })
   default = {}
 }
