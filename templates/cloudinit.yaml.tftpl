@@ -7,7 +7,6 @@ groups:
 %{ endfor ~}
 %{ endif ~}
 
-
 %{ if cloudinit_userdata.users != "" ~}
 users:
   - default:
@@ -17,5 +16,16 @@ users:
     %{if user.shell != ""}shell: ${user.shell} %{endif}
     %{if user.sudo != ""}sudo: ${user.sudo} %{endif}
     %{if user.ssh-authorized-keys != ""}ssh-authorized-keys: ${user.ssh-authorized-keys} %{endif}
+%{ endfor ~}
+%{ endif ~}
+
+%{ if cloudinint_userdata.write_files != "" ~}
+write_files:
+%{ for file in cloudinit_userdata.write_files ~}
+  - path: ${file.path}
+    %{if file.content != ""}content: ${file.content} %{endif}
+    %{if file.encoding != ""}encoding: ${file.encoding} %{endif}
+    %{if file.owner != ""}owner: ${file.owner} %{endif}
+    %{if file.permissions != ""}permissions: ${file.permissions} %{endif}
 %{ endfor ~}
 %{ endif ~}
