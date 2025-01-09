@@ -19,7 +19,7 @@ users:
 %{ endfor ~}
 %{ endif ~}
 
-%{ if cloudinint_userdata.write_files != "" ~}
+%{ if cloudinit_userdata.write_files != "" ~}
 write_files:
 %{ for file in cloudinit_userdata.write_files ~}
   - path: ${file.path}
