@@ -29,3 +29,10 @@ write_files:
     %{if file.permissions != ""}permissions: ${file.permissions} %{endif}
 %{ endfor ~}
 %{ endif ~}
+
+%{ if cloudinit_userdata.runcmd != "" ~}
+runcmd:
+%{ for cmd in cloudinit_userdata.runcmd ~}
+  - ${yamlencode({[for arg in cmd : "${arg}"],})}
+%{ endfor ~}
+%{ endif ~}
