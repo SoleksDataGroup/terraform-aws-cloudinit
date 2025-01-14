@@ -7,32 +7,32 @@ groups:
 %{ endfor ~}
 %{ endif ~}
 
-%{ if cloudinit_userdata.users != "" ~}
+%{ if cloudinit_userdata.users != null ~}
 users:
   - default:
 %{ for user in cloudinit_userdata.users ~}
   - name: ${user.name}
-    %{if user.primary_group != ""}primary_group: ${user.primary_group} %{endif}
-    %{if user.shell != ""}shell: ${user.shell} %{endif}
-    %{if user.sudo != ""}sudo: ${user.sudo} %{endif}
-    %{if user.ssh-authorized-keys != ""}ssh-authorized-keys: ${user.ssh-authorized-keys} %{endif}
+    %{if user.primary_group != null}primary_group: ${user.primary_group} %{endif}
+    %{if user.shell != null}shell: ${user.shell} %{endif}
+    %{if user.sudo != null}sudo: ${user.sudo} %{endif}
+    %{if user.ssh-authorized-keys != null}ssh-authorized-keys: ${user.ssh-authorized-keys} %{endif}
 %{ endfor ~}
 %{ endif ~}
 
-%{ if cloudinit_userdata.write_files != "" ~}
+%{ if cloudinit_userdata.write_files != null ~}
 write_files:
 %{ for file in cloudinit_userdata.write_files ~}
   - path: ${file.path}
-    %{if file.content != ""}content: ${file.content} %{endif}
-    %{if file.encoding != ""}encoding: ${file.encoding} %{endif}
-    %{if file.owner != ""}owner: ${file.owner} %{endif}
-    %{if file.permissions != ""}permissions: ${file.permissions} %{endif}
+    %{if file.content != null}content: ${file.content} %{endif}
+    %{if file.encoding != null}encoding: ${file.encoding} %{endif}
+    %{if file.owner != null}owner: ${file.owner} %{endif}
+    %{if file.permissions != null}permissions: ${file.permissions} %{endif}
 %{ endfor ~}
 %{ endif ~}
 
-%{ if cloudinit_userdata.runcmd != "" ~}
+%{ if cloudinit_userdata.runcmd != null ~}
 runcmd:
 %{ for cmd in cloudinit_userdata.runcmd ~}
-  - ${yamlencode({[for arg in cmd : "${arg}"],})}
+  - ${jsonencode(cmd)}
 %{ endfor ~}
 %{ endif ~}
