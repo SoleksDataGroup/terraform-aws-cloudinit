@@ -32,10 +32,7 @@ variable "cloudinit_userdata" {
       permissions = optional(string)
       owner = optional(string)
     })))
-    runcmd = optional(list(object({
-      command = string
-      args = optional(list(string))
-    })))
+    runcmd = optional(list(list(string)))
   })
   default = {}
 }
